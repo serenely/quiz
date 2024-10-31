@@ -38,9 +38,14 @@ export const ResultPage = ({ userInput }) => {
           <p className={s.container__subtitle}>Perfect for if you're looking for soft, nourished skin, our moisturizing body washes are made with skin-natural
            nutrients that work with your skin to replenish moisture. With a light formula, the bubbly lather leaves your skin feeling cleansed and cared for. 
            And by choosing relaxing fragrances you can add a moment of calm to the end of your day.</p>
-          <button className={s.container__startButton} onClick={resetQuizHandler}>Retake the quiz </button>
+          <button className={s.container__resetButton} onClick={resetQuizHandler}>Retake the quiz </button>
         </div>
       </div>
+      <ul>
+        {answers.map((answer, index) => (
+          <li key={index}>{answer}</li>
+        ))}
+      </ul>
     </div>
   )
 }

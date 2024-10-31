@@ -22,7 +22,6 @@ const quizSlice = createSlice({
     },
     removeLastAnswer: (state) => {
       state.answers.pop();
-      state.selectedAnswer = null;
     }
   }
 });

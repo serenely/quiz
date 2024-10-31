@@ -1,14 +1,14 @@
-.container{
+.container {
   position: relative;
   font-family: 'Playfair Display', serif;
 
-  &__background{
+  &__background {
     z-index: 1;
     width: 100%;
-    filter: brightness(60%); 
-   }
+    filter: brightness(60%);
+  }
 
-  &__content{
+  &__content {
     position: absolute;
     top: 20%;
     left: 30%;
@@ -19,23 +19,25 @@
     align-items: center;
   }
 
-  &__title{
+  &__title {
     color: white;
     font-size: 44px;
     font-weight: 200;
-    line-height: 35px;
+    line-height: 45px;
     width: 70%;
+    margin-bottom: 10px;
   }
 
-  &__subtitle{
+  &__subtitle {
     color: white;
     font-size: 19px;
     font-weight: 400;
-    line-height: 16px;
+    line-height: 26px;
+    margin-top: 5px;
     width: 50%;
   }
 
-  &__startButton{
+  &__startButton {
     font-size: 19px;
     width: 25%;
     height: 100%;
@@ -45,5 +47,65 @@
     cursor: pointer;
     padding: 20px;
     font-weight: 400;
+  }
+
+  &__startButton:hover{
+    background-color: #5BC1ED;
+    color: white;
+
+  }
+
+  @media (max-width: 768px) {
+    &__content {
+      top: 15%;
+      left: 25%;
+    }
+
+    &__title {
+      font-size: 14px;
+      width: 80%;
+      line-height: 25px;
+      text-align: center;
+    }
+
+    &__subtitle {
+      font-size: 8px;
+      width: 90%;
+      line-height: 8px;
+      text-align: center;
+    }
+
+    &__startButton {
+      font-size: 16px;
+      width: 70%;
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__content {
+      top: 15%;
+      left: 25%;
+    }
+
+    &__title {
+      font-size: 14px;
+      width: 80%;
+      line-height: 25px;
+      text-align: center;
+    }
+
+    &__subtitle {
+      font-size: 8px;
+      width: 90%;
+      line-height: 8px;
+      text-align: center;
+    }
+
+    &__startButton {
+      font-size: 16px;
+      width: 70%;
+      padding: 12px;
+    }
   }
 }
