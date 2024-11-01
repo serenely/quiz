@@ -13,6 +13,8 @@ export const Quiz = ({ title, nextBtn, options, currentStep, previousPage, nextP
   const totalSteps = 5;
 
   useEffect(() => {
+    dispatch(setSelectedAnswer(null));
+
     if (answers[currentStep - 1] !== undefined) {
       dispatch(setSelectedAnswer(answers[currentStep - 1]));
     }
@@ -56,7 +58,11 @@ export const Quiz = ({ title, nextBtn, options, currentStep, previousPage, nextP
         </div>
         <div className={s.navigationButtons}>
           <button className={s.backButton} onClick={previousPageHandler}>Back</button>
-          <button className={s.nextButton} onClick={nextPageHandler}>
+          <button 
+            className={s.nextButton} 
+            onClick={nextPageHandler} 
+            disabled={!selectedAnswer} 
+          >
             {nextBtn}
             {currentStep < totalSteps && <img src={arrowRight} alt="Arrow Right" />}
           </button>

@@ -93,7 +93,7 @@ export const ResultPage = () => {
   return (
     <div className={s.container}>
       <div className={s.container__quiz}>
-        <img className={s.container__background} src="./assets/quiz-background2.png" alt="background" />
+        <div className={s.container__grey}></div>
         <div className={s.container__content}>
           <p className={s.container__title}>Build your everyday self-care routine.</p>
           <p className={s.container__subtitle}>
