@@ -1,30 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const loadAnswersFromLocalStorage = () => {
+  const savedAnswers = localStorage.getItem('answers');
+  return savedAnswers ? JSON.parse(savedAnswers) : [];
+};
+
+const saveAnswersToLocalStorage = (answers) => {
+  localStorage.setItem('answers', JSON.stringify(answers));
+};
+
 const quizSlice = createSlice({
   name: 'quiz',
   initialState: {
-    answers: [],
+    answers: loadAnswersFromLocalStorage(),
     selectedAnswer: null,
   },
   reducers: {
-    addCurrentAnswer: (state) => {
-      if (state.selectedAnswer) {
-        state.answers.push(state.selectedAnswer); 
-        state.selectedAnswer = null; 
-      }
+    addCurrentAnswer: (state, action) => {
+      const { answer, stepIndex } = action.payload; 
+
+      state.answers[stepIndex] = answer;
+      state.selectedAnswer = null;
+      saveAnswersToLocalStorage(state.answers); 
     },
     resetAnswers: (state) => {
       state.answers = [];
       state.selectedAnswer = null;
+      localStorage.removeItem('answers'); 
     },
     setSelectedAnswer: (state, action) => {
       state.selectedAnswer = action.payload;
-    },
-    removeLastAnswer: (state) => {
-      state.answers.pop();
     }
   }
 });
 
-export const { addCurrentAnswer, resetAnswers, setSelectedAnswer, removeLastAnswer } = quizSlice.actions;
+export const { addCurrentAnswer, resetAnswers, setSelectedAnswer } = quizSlice.actions;
 export default quizSlice.reducer;
