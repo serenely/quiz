@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import s from './index.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { resetAnswers } from '../../redux/quizSlice';
 
@@ -11,10 +11,11 @@ export const ResultPage = () => {
   const [products, setProducts] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false); 
+  const answers = useSelector(state => state.quiz.answers);
+  const itemsPerPage = 2;
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const itemsPerPage = 2; 
-  const totalPages = Math.max(1, Math.ceil(products.length / itemsPerPage)); 
-  const [currentPage, setCurrentPage] = useState(0); 
+  const selectedTags = [...new Set(answers.flatMap(answer => answer.tags))];
 
   useEffect(() => {
     if (!isLoaded) {
@@ -56,7 +57,6 @@ export const ResultPage = () => {
             id: product.id || index + 1,
           }));
           setProducts(productsWithId);
-          console.log("Loaded products:", productsWithId);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -66,12 +66,17 @@ export const ResultPage = () => {
     fetchProducts();
   }, []);
 
-  const sortedProducts = [
-    ...products.filter((product) => favoriteItems.includes(product.id)),
-    ...products.filter((product) => !favoriteItems.includes(product.id))
+  const filteredProducts = [
+    ...products.filter(product => favoriteItems.includes(product.id)),
+    ...products.filter(product => 
+      !favoriteItems.includes(product.id) &&
+      product.tags.some(tag => selectedTags.includes(tag))
+    ),
   ];
 
-  const currentProducts = sortedProducts.slice(
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
+
+  const currentProducts = filteredProducts.slice(
     currentPage * itemsPerPage,
     currentPage * itemsPerPage + itemsPerPage
   );
@@ -132,7 +137,7 @@ export const ResultPage = () => {
           <img className={s.container__nextSlide} onClick={goToNextPage} disabled={currentPage === totalPages - 1} src={iconNext} alt='next' />
         </div>
 
-        <div className={s.pagination}>
+        <div className={s.container__pagination}>
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}

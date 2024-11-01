@@ -10,6 +10,7 @@ export const Quiz = ({ title, nextBtn, options, currentStep, previousPage, nextP
   const navigate = useNavigate();
   const selectedAnswer = useSelector(state => state.quiz.selectedAnswer);
   const answers = useSelector(state => state.quiz.answers);
+  const totalSteps = 5;
 
   useEffect(() => {
     if (answers[currentStep - 1] !== undefined) {
@@ -19,6 +20,7 @@ export const Quiz = ({ title, nextBtn, options, currentStep, previousPage, nextP
 
   const handleOptionClick = (option) => {
     dispatch(setSelectedAnswer(option));
+    dispatch(addCurrentAnswer({ answer: option, stepIndex: currentStep - 1 }));
   };
 
   const previousPageHandler = () => {
@@ -27,7 +29,6 @@ export const Quiz = ({ title, nextBtn, options, currentStep, previousPage, nextP
 
   const nextPageHandler = () => {
     if (selectedAnswer) {
-      dispatch(addCurrentAnswer({ answer: selectedAnswer, stepIndex: currentStep - 1 }));
       navigate(nextPage);
     } else {
       alert("Please select an option before proceeding.");
@@ -41,23 +42,28 @@ export const Quiz = ({ title, nextBtn, options, currentStep, previousPage, nextP
       <div className={s.quizContainer}>
         <p className={s.title}>{title}</p>
         <div className={s.optionsContainer}>
-          {options.map((option, index) => (
-            <button
-              key={index}
-              className={`${s.optionButton} ${selectedAnswer === option ? s.selected : ''}`}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </button>
+          {options && options.map((option, index) => (
+            option && option.label ? ( 
+              <button
+                key={index}
+                className={`${s.optionButton} ${selectedAnswer && selectedAnswer.label === option.label ? s.selected : ''}`}
+                onClick={() => handleOptionClick(option)}
+              >
+                {option.label}
+              </button>
+            ) : null
           ))}
         </div>
         <div className={s.navigationButtons}>
           <button className={s.backButton} onClick={previousPageHandler}>Back</button>
-          <button className={s.nextButton} onClick={nextPageHandler}>{nextBtn} <img src={arrowRight} alt="Arrow Right" /></button>
+          <button className={s.nextButton} onClick={nextPageHandler}>
+            {nextBtn}
+            {currentStep < totalSteps && <img src={arrowRight} alt="Arrow Right" />}
+          </button>
         </div>
       </div>
 
-      <QuizProgress currentStep={currentStep} totalSteps={5} />
+      <QuizProgress currentStep={currentStep} totalSteps={totalSteps} />
     </div>
   );
 };

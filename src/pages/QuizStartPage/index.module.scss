@@ -2,16 +2,25 @@
   position: relative;
   font-family: 'Playfair Display', serif;
 
-  &__background {
-    z-index: 1;
-    width: 100%;
-    filter: brightness(60%);
+  &__quiz {
+    background-image: url('../../../public/assets/quiz-background.png');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 50vh;
+  }
+
+  &__grey{ 
+    background-color: black;
+    width: 100vw;
+    height: 50vh;
+    opacity: 0.4;
   }
 
   &__content {
     position: absolute;
     top: 20%;
-    left: 30%;
+    left: 28%;
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -26,6 +35,7 @@
     line-height: 45px;
     width: 70%;
     margin-bottom: 10px;
+
   }
 
   &__subtitle {
