@@ -7,13 +7,13 @@
       background-size: cover;
       background-position: center;
       width: 100vw;
-      height: 55vh;
+      height: 65vh;
     }
   
     &__grey{ 
       background-color: black;
       width: 100vw;
-      height: 55vh;
+      height: 65vh;
       opacity: 0.4;
     }
     &__content {
@@ -64,7 +64,7 @@
 
     &__productOffer{
       position: absolute;
-      top: 80%;
+      top: 90%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -178,61 +178,145 @@
     }
 
     @media (max-width: 768px) {
-        &__content {
-            top: 15%;
-            left: 25%;
-          }
-      
-          &__title {
-            font-size: 14px;
-            width: 80%;
-            line-height: 25px;
-            text-align: center;
-          }
-      
-          &__subtitle {
-            font-size: 8px;
-            width: 90%;
-            line-height: 8px;
-            text-align: center;
-          }
-      
-          &__startButton {
-            font-size: 16px;
-            width: 70%;
-            padding: 12px;
-          }
-        &__resetButton {
-            font-size: 16px;
-            width: 30%;
-            padding: 2px;
-        }
+      &__title, &__subtitle, &__desc__title, &__desc__subtitle {
+          text-align: center;
+          width: 90%;
+      }
+  
+      &__title {
+          font-size: 28px;
+          line-height: 1.2;
+      }
+  
+      &__subtitle {
+          font-size: 14px;
+      }
+  
+      &__desc__title {
+          font-size: 18px;
+      }
+  
+      &__desc__subtitle {
+          font-size: 12px;
+      }
+  
+      &__resetButton {
+          font-size: 14px;
+          padding: 12px 18px;
+          width: 50%;
+      }
+  
+      &__productOffer {
+          width: 100%;
+          padding: 25px;
+      }
+  
+      &__firstItem {
+          gap: 20px;
+          justify-content: space-between;
+          width: 100%;
+          padding: 20px 0;
+      }
+  
+      &__slider {
+          gap: 20px;
+          padding: 20px 0;
+      }
+  }
+  
+  /* Mobile Styling */
+  @media (max-width: 480px) {
+    &__quiz {
+      background-image: url('../../../public/assets/quiz-background2.png');
+      background-size: cover;
+      background-position: center;
+      width: 100vw;
+      height: 45vh;
     }
-
-    @media (max-width: 480px) {
-        &__content {
-            top: 15%;
-            left: 25%;
-          }
-      
-          &__title {
-            font-size: 14px;
-            width: 80%;
-            line-height: 25px;
-            text-align: center;
-          }
-      
-          &__subtitle {
-            font-size: 8px;
-            width: 90%;
-            line-height: 8px;
-            text-align: center;
-          }
-      
-        &__resetButton {
-            font-size: 16px;
-            width: 30%;
-            padding: 2px;
-        }
+  
+    &__grey{ 
+      background-color: black;
+      width: 100vw;
+      height: 45vh;
+      opacity: 0.4;
     }
+      &__content {
+          top: 10%;
+          left: 5%;
+      }
+  
+      &__title {
+          font-size: 24px;
+          width: 100%;
+          line-height: 1.2;
+      }
+  
+      &__subtitle {
+          font-size: 14px;
+          width: 100%;
+          line-height: 1.2;
+      }
+  
+      &__resetButton {
+          font-size: 14px;
+          width: 80%;
+          padding: 10px 12px;
+      }
+  
+      &__firstItem {
+          position: relative;
+          width: 100%;
+          gap: 20px;
+          justify-content: space-between;
+      }
+      
+      &__desc{
+        width: 100%;
+      }
+      &__desc__title {
+          font-size: 18px;
+          margin-bottom: 15px;
+      }
+  
+      &__desc__subtitle {
+          font-size: 12px;
+          width: 90%;
+          line-height: 1.4;
+      }
+  
+      &__slider {
+          flex-direction: column;
+          gap: 2px;
+          width: 100%;
+      }
+  
+      &__prevSlide{
+        width: 0%;
+        height: 0%;
+      }
+       &__nextSlide {
+          width: 10%;
+          height: auto;
+      }
+  
+      &__productOffer {
+          width: 90%;
+          padding: 20px;
+          top: auto;
+      }
+  
+      &__item {
+          width: 90%; /* Increased width for larger images */
+          max-width: 90%;
+          margin: 10px auto;
+          padding: 15px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+      }
+      &__pagination{
+        padding: 0;
+      }
+  }
+  
 }
